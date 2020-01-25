@@ -1,12 +1,21 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:10'
+            args '-p 3100:3100 -e PORT=3100' 
+        }
+    }
     stages {
         stage('Build') {
+            when {
+                branch 'master'
+            }
             steps {
                 echo 'Running build automation'
-                
+                sh 'npm install'
             }
         }
+      }
         stage('Build Docker image') {
             when {
                 branch 'master'
@@ -15,7 +24,7 @@ pipeline {
                 script {
                     app = docker.build("nettadmin/testapp")
                     app.inside {
-                        sh 'sleep 30 && echo $(curl localhost:3100)'
+                        sh 'sleep 10 && echo $(curl localhost:3100)'
                     }
                 }
             }
