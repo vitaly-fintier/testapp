@@ -1,10 +1,15 @@
 pipeline {
-   agent any
+    agent { dockerfile true }
     stages {
         stage('Build') {
             steps {
                 echo 'Running build automation'
-                sh 'npm install'
+            }
+        }
+       stage('Test') {
+            steps {
+                sh 'node --version'
+                sh 'curl localhost:3100'
             }
         }
         stage('Build Docker image') {
@@ -14,9 +19,6 @@ pipeline {
             steps {
                 script {
                     app = docker.build("nettadmin/testapp")
-                    app.inside {
-                        sh 'sleep 10 && echo $(curl localhost:3100)'
-                    }
                 }
             }
         }
