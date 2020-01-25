@@ -15,7 +15,7 @@ pipeline {
                 script {
                     app = docker.build("nettadmin/testapp")
                     app.inside {
-                        sh 'echo $(curl localhost:3100)'
+                        sh 'sleep 30 && echo $(curl localhost:3100)'
                     }
                 }
             }
