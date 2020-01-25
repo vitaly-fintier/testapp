@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'node:10'
-            args '-p 3100:3100 -e PORT=3100' 
         }
     }
     stages {
