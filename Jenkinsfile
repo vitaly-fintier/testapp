@@ -1,5 +1,5 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
     stages {
         stage('Build') {
             steps {
@@ -9,7 +9,6 @@ pipeline {
        stage('Test') {
             steps {
                 sh 'node --version'
-                sh 'curl localhost:3100'
             }
         }
         stage('Build Docker image') {
