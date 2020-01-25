@@ -1,20 +1,12 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:10'
-        }
-    }
+   agent any
     stages {
         stage('Build') {
-            when {
-                branch 'master'
-            }
             steps {
                 echo 'Running build automation'
                 sh 'npm install'
             }
         }
-      }
         stage('Build Docker image') {
             when {
                 branch 'master'
