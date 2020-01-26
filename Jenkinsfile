@@ -50,7 +50,7 @@ pipeline {
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$app_server_ip \"docker run --restart always --name testapp -p 3100:3100 -d nettadmin/testapp:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$app_server_ip \"docker run --restart always --name testapp -p 3100:3100 -d registry.hub.docker.com/nettadmin/testapp:${env.BUILD_NUMBER}\""
                     }
                 }
             }
